@@ -1,0 +1,46 @@
+{
+    "family": "nestjs-mock-app-dev",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "256",
+    "memory": "512",
+    "executionRoleArn": "<EXECUTION_ROLE_ARN>",
+    "taskRoleArn": "TASK_ROLE_ARN",
+    "containerDefinitions": [
+        {
+        "name": "<CONTAINER_NAME>",
+        "image": "<IMAGE1_NAME>",
+        "essential": true,
+        "portMappings": [
+            {
+            "containerPort": <CONTAINER_PORT>,
+            "protocol": "tcp"
+            }
+        ],
+        "secrets": [
+            {
+            "name": "APP_NAME",
+            "valueFrom": "<APP_CONFIG_SECRET_ARN>:username::"
+            },
+            {
+            "name": "APP_ENV",
+            "valueFrom": "<APP_CONFIG_SECRET_ARN>:password::"
+            },
+            {
+            "name": "APP_VERSION",
+            "valueFrom": "<APP_CONFIG_SECRET_ARN>:dbname::"
+            }
+        ],
+        "healthCheck": {
+            "command": [
+            "CMD-SHELL",
+            "wget -qO- http://localhost:<CONTAINER_PORT>/ || exit 1"
+            ],
+            "interval": 30,
+            "timeout": 5,
+            "retries": 3,
+            "startPeriod": 60
+        }
+        }
+    ]
+}

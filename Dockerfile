@@ -25,8 +25,8 @@ COPY --from=build /app/dist ./dist
 ENV APP_NAME=mock-app
 ENV APP_ENV=production
 ENV APP_VERSION=1.0.0
-ENV PORT=3000
+ENV PORT=8000
 
-EXPOSE 3000
+EXPOSE 8000
 
 CMD ["node", "dist/main.js"]
