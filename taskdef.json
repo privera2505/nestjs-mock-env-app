@@ -40,6 +40,14 @@
             "timeout": 5,
             "retries": 3,
             "startPeriod": 60
+        },
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "<TASK_CLOUDWATCH_GROUP>",
+                "awslogs-region": "<AWS_DEFAULT_REGION>",
+                "awslogs-stream-prefix": "<TASk_CLOUDWATCH_STREAM_PREFIX>"
+            }
         }
         }
     ]
